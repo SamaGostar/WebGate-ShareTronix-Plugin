@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Edited by www.Sharetronix.ir - 9119303114 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>آموزش نصب پلاگین حامیان مالی با پرداخت آنلاین زرین پال برای شیرترانیکس</title>
+		<style>
+		body{
+		background:#000;
+		color:#ffffff;
+		font-family:tahoma , arial;
+		fant-size:12px;
+		direction:rlt;
+		text-align:right;
+		}
+		
+	textarea{
+	width:500px;
+	height:150px;
+	background: #ffffff;
+	padding:6px;
+direction: ltr;
+text-align:left;
+color: blue;
+border: dashed 1px #888888;
+	}
+	
+	
+		.dec{
+		font-weight:bold;
+		padding: 10px;
+		direction:rtl;
+		text-align:right;
+		border-top:solid 1px;
+		
+		}
+		</style>
+		</head>
+		
+		<body>
+		<center>
+		پلاگین پرداخت آنلاین و ثبت مجوز ساخت گروه برای شیرترانیکس <br><br>
+
+		<br><br>
+
+		</center>
+		<div class="dec">
+		1-ابتدا در برگه sql کد زیر را اجرا کنید برای این کار به phpmyadmin سپس دیتا بیس مربوطه برید
+		</div>
+		
+		<textarea readonly >
+		
+CREATE TABLE `users_support` (
+`id` INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT ,
+`user_id` INT( 10 ) UNSIGNED NOT NULL ,
+`date` VARCHAR( 255 ) NOT NULL ,
+`how` INT( 10 ) NOT NULL ,
+`amount` INT( 10 ) NOT NULL ,
+`l_amount` INT( 10 ) NOT NULL,
+`l_amount2` INT( 10 ) NOT NULL,
+`active` ENUM( '0', '1' ) NOT NULL , 
+PRIMARY KEY ( `id` )
+) ENGINE = MYISAM ;
+ALTER TABLE `users_support` ADD INDEX ( `user_id` )
+		</textarea>
+		
+			<div class="dec">
+	2- به فایل های support-zarin.php و verify-support.php در پوشه system/controllers برید و کد زیر را بیابید و مقدار بدید(مرچن آیدی درگاه خود)
+		</div>
+		
+		<textarea readonly >
+		
+$merchantID
+		</textarea>
+		
+		
+		<div class="dec">
+	3- به system/controllers/dashboard.php  برید و در آخر کد زیر را بیابید
+		</div>
+		
+		<textarea readonly >
+		
+$this->load_template('dashboard.php');
+		</textarea>
+				<div class="dec">
+	4- حالا قبل از آن کد زیر را بدهید
+		</div>
+		
+		<textarea readonly >
+///////////ARASH TAVANAEI 09130246374     mahfell.com/forums    persiafacebook.com//////////////
+$D->supporting = array();
+
+$sup_uq = $db2->query('SELECT user_id FROM users_support WHERE active="1" ORDER BY id DESC ');
+while($sup_uo = $db2->fetch_object($sup_uq)){
+
+$D->supporting[] = $this->network->get_user_by_id($sup_uo->user_id, TRUE);
+
+}
+
+$D->supporting = array_slice($D->supporting,0);
+///////////ARASH TAVANAEI 09130246374     mahfell.com/forums    persiafacebook.com//////////////
+		</textarea>
+		
+		
+						<div class="dec">
+	4- به themes/YOUR_THEME/html/dashboard.php برید و کد زیر را بیابید
+		</div>
+		
+		<textarea readonly >
+&lt;div id="home_right"&gt;
+		</textarea>
+		
+								<div class="dec">
+	4- بعد از آن کد زیر را بدهید
+		</div>
+		
+		<textarea readonly >
+&lt;div class="ttl" style="margin-top:0px; margin-bottom:8px;">
+	&lt;div class="ttl2">&lt;h3>حاميان مالي &lt;/h3>
+	
+	
+	&lt;a href="<?= $C->SITE_URL ?>support-zarin" class="ttlink">شما هم حامي شويد...&lt;/a>
+	
+	&lt;/div>&lt;/div>
+	&lt;div class="slimusergroup" style="margin-right:1px; margin-left:3px; margin-bottom:5px;">
+	
+	
+	<?php if(!empty($D->supporting)){ foreach($D->supporting as $u) { ?>
+	
+	
+	&lt;a href="javascript:;" onclick="NewWindow ('<?= $C->SITE_URL?>show-support?uid=<?= base64_encode($u->id)?> ','supports','400','350','center','front');" class="slimuser" title="<?= htmlspecialchars($u->username) ?>">&lt;img src="<?= $C->IMG_URL ?>avatars/thumbs3/<?= $u->avatar ?>" alt="" style="padding:1px;" />&lt;/a>
+	
+
+	<?php } }else{
+	echo "<a href=".$C->SITE_URL."support-zarin class=\"ttlink\">حامي وجود ندارد شما اولين باشيد.کليک کنيد</a>";
+	}?>
+	&lt;/div>
+		</textarea>
+		
+				
+		</body>
+		
+		</html>
