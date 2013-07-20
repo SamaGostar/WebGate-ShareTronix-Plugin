@@ -32,7 +32,7 @@ require_once('helpers/nusoap.php');
 	//Redirect to URL You can do it also by creating a form
 	if($res->Status == 100)
 	{
-		$this->redirect("https://www.zarinpal.com/pg/StartPay/" . $res->Authority . "/");
+		$this->redirect("https://de.zarinpal.com/pg/StartPay/" . $res->Authority . "/");
 	}else{
 	$D->err = TRUE;
 	}
