@@ -39,7 +39,7 @@ ALTER TABLE `users_support` ADD INDEX ( `user_id` )
 			$D->amount    = $db2->fetch_field('SELECT  l_amount FROM users_support WHERE user_id="'.$this->user->id.'" LIMIT 1'); ; //Amount will be based on Toman
 			$au = $_GET['Authority'];
 			
-			$client = new nusoap_client('https://www.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
+			$client = new nusoap_client('https://de.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
 			$res = $client->call("PaymentVerification", array(
 			array(
 						'MerchantID'	 => $merchantID ,
