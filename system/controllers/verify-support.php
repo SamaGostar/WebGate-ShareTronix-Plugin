@@ -56,6 +56,7 @@ ALTER TABLE `users_support` ADD INDEX ( `user_id` )
 			
 			
 			}else{
+				echo'ERR: '.$res->Status;
 			$D->submit = FALSE;
 			}
 		
