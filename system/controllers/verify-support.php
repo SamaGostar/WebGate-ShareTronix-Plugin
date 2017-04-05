@@ -7,7 +7,7 @@
 	}
 	require_once('helpers/nusoap.php');
 
-	if(!$_POST['Authority']){
+	if(!$_GET['Authority']){
 			$this->redirect('home');
 	
 	}
@@ -51,7 +51,7 @@ ALTER TABLE `users_support` ADD INDEX ( `user_id` )
 			if($res['Status']  == 100){
 			$D->submit = TRUE;
 			
-			$db2->query('UPDATE  users_support SET   amount=amount+"'.trim($D->amount).'" ,date="'.time().'" , how=how+1 ,  l_amount2="'.$D->amount.'",l_amount="", active="1"   WHERE user_id="'.$this->user->id.'" LIMIT 1');
+			$db2->query('UPDATE  users_support SET   amount=amount+"'.trim($D->amount).'" ,date="'.time().'" , how=how+1 ,  l_amount2="'.$D->amount.'",l_amount="'.$D->amount.'", active="1"   WHERE user_id="'.$this->user->id.'" LIMIT 1');
 			
 			
 			
